@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 16:19:37 by jubeal            #+#    #+#             */
-/*   Updated: 2018/11/29 18:41:23 by scoron           ###   ########.fr       */
+/*   Updated: 2018/11/30 13:25:15 by jubeal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,27 @@ void	lst_free(t_pieces *tmp)
 	free(tmp);
 }
 
+void	convert_to_16bits(char **line)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	if (!(tmp = (char *)malloc(sizeof(char) * 16)))
+		return ;
+	while ((*line)[i])
+		i++;
+	j = -1;
+	while (++j + i < 16)
+		tmp[j] = '0';
+	i = -1;
+	while (++i + j < 16)
+		tmp[i + j] = (*line)[i];
+	free(*line);
+	*line = tmp;
+}
+
 void	piece_in_map(char **map, int taille_map, unsigned short *piece,
 		char car)
 {
@@ -45,13 +66,13 @@ void	piece_in_map(char **map, int taille_map, unsigned short *piece,
 	while (++i < taille_map)
 	{
 		line = ft_itoa(piece[i]);
-		printf("line : %s\n", line);
 		line = ft_convert_base(line, "0123456789", "01");
-		printf("line post : %s\n", line);
+		convert_to_16bits(&line);
 		j = -1;
 		while (++j < taille_map)
 			if (line[j] == '1')
 				map[i][j] = car;
+		free(line);
 	}
 }
 
@@ -78,7 +99,6 @@ void	affichage(t_pieces *head, int taille_map)
 	{
 		piece_in_map(map, taille_map,  head->piece, aff);
 		aff++;
-		ft_putstr("pas encore\n");
 		tmp = head;
 		head = head->next;
 		lst_free(tmp);

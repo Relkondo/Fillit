@@ -6,16 +6,17 @@
 #    By: scoron <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:44:30 by scoron            #+#    #+#              #
-#    Updated: 2018/11/29 18:29:51 by scoron           ###   ########.fr        #
+#    Updated: 2018/12/01 21:22:48 by scoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = exec
+NAME = fillit
 
 SRCS = check_pieces.c \
 	   solve.c \
 	   main.c \
-	   affichage.c
+	   affichage.c \
+	   move_piece.c
 
 OBJS = $(SRCS:.c=.o)
 

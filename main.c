@@ -6,14 +6,13 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:01 by jubeal            #+#    #+#             */
-/*   Updated: 2018/11/29 18:32:50 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/01 21:55:01 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <fcntl.h>
 #include "fillit.h"
-#include <stdio.h>
 
 int		check_line(char *str, int type)
 {
@@ -28,11 +27,8 @@ int		check_line(char *str, int type)
 			if (str[i] != '.' && str[i] != '#')
 				return (0);
 	}
-	else
-	{
-		if (ft_strlen(str) != 0)
+	else if (ft_strlen(str) != 0)
 			return (0);
-	}
 	return (1);
 }
 
@@ -74,6 +70,25 @@ int		errors(int type)
 	return (1);
 }
 
+int		ft_sqsize(t_pieces *head)
+{
+	int i;
+	int j;
+	
+	if (!head)
+		return (0);
+	i = 4;
+	while (head->next)
+	{
+		head = head->next;
+		i += 4;
+	}
+	j = 2;
+	while (j * j < i)
+		j++;
+	return (j - 1);
+}
+
 int		main(int ac, char **av)
 {
 	int				fd;
@@ -84,24 +99,12 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		return (errors(1));
 	head = create_lstlink(&head);
-	if ((fd = open(av[1], O_RDONLY)) == -1)
-		return (errors(2));
-	if (!check_file(fd, &head))
+	if ((fd = open(av[1], O_RDONLY)) == -1 || !check_file(fd, &head)
+			|| !(map = (unsigned short *)malloc(sizeof(unsigned short) * 16)))
 		return (errors(2));
 	initialize_pieces(&head);
-	sq_size = 1;
-	map =  NULL;
-	while (sq_size++ < 16 && map == NULL)
-	{
-		fd = -1;
-		if (!(map = malloc(sizeof(short) * sq_size)))
-			return (errors(2));
-		while (++fd < sq_size)
-			map[fd] = 0;
-		map = ft_solve(head, map, sq_size);
-	}
-	if (map == NULL)
-		return (0);
-	affichage(head, sq_size);
+	sq_size = ft_sqsize(head);
+	if ((sq_size = ft_solve_init(head, &map, sq_size)))
+		affichage(head, sq_size - 1);
 	return (0);
 }
