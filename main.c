@@ -6,60 +6,13 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:01 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/01 22:15:38 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/01 22:24:19 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <fcntl.h>
 #include "fillit.h"
-
-int		check_line(char *str, int type)
-{
-	int		i;
-
-	i = -1;
-	if (type == 0)
-	{
-		if (ft_strlen(str) != 4)
-			return (0);
-		while (str[++i])
-			if (str[i] != '.' && str[i] != '#')
-				return (0);
-	}
-	else if (ft_strlen(str) != 0)
-		return (0);
-	return (1);
-}
-
-int		check_file(int fd, t_pieces **head)
-{
-	char		*line;
-	int			nbr_lines;
-	t_pieces	*tmp;
-
-	nbr_lines = 1;
-	tmp = *head;
-	while (get_next_line(fd, &line) > 0)
-	{
-		if (!tmp && !(tmp = create_lstlink(head)))
-			return (0);
-		if ((nbr_lines % 5))
-		{
-			if (!(check_line(line, 0)))
-				return (0);
-			line_convert(&tmp, line, (nbr_lines % 5) - 1);
-		}
-		else
-		{
-			if (!(check_line(line, 1)))
-				return (0);
-			tmp = tmp->next;
-		}
-		nbr_lines++;
-	}
-	return (tmp == NULL ? 0 : 1);
-}
 
 int		errors(int type)
 {

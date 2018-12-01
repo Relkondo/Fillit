@@ -6,7 +6,7 @@
 #    By: scoron <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:44:30 by scoron            #+#    #+#              #
-#    Updated: 2018/12/01 21:22:48 by scoron           ###   ########.fr        #
+#    Updated: 2018/12/01 22:23:54 by scoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = check_pieces.c \
 	   solve.c \
 	   main.c \
 	   affichage.c \
-	   move_piece.c
+	   move_piece.c \
+	   support_check.c
 
 OBJS = $(SRCS:.c=.o)
 

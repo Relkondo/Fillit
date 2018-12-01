@@ -5,64 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 15:46:17 by jubeal            #+#    #+#             */
-/*   Updated: 2018/11/29 18:31:59 by scoron           ###   ########.fr       */
+/*   Created: 2018/12/01 22:22:28 by jubeal            #+#    #+#             */
+/*   Updated: 2018/12/01 22:23:35 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
+#include <fcntl.h>
 #include "fillit.h"
 
-t_pieces	*create_lstlink(t_pieces **link)
+int		check_line(char *str, int type)
 {
-	int			i;
-	t_pieces	*tmp;
+	int		i;
 
 	i = -1;
-	tmp = *link;
-	if (tmp)
+	if (type == 0)
 	{
-		while (tmp->next)
-			tmp = tmp->next;
-		if (!(tmp->next = (t_pieces *)malloc(sizeof(t_pieces))))
-			return ((t_pieces *)0);
-		tmp = tmp->next;
+		if (ft_strlen(str) != 4)
+			return (0);
+		while (str[++i])
+			if (str[i] != '.' && str[i] != '#')
+				return (0);
 	}
-	else
-	{
-		if (!(tmp = (t_pieces *)malloc(sizeof(t_pieces))))
-			return ((t_pieces *)0);
-	}
-	if (!(tmp->piece = (unsigned short *)malloc(sizeof(unsigned short)
-					* 16)))
-		return ((t_pieces *)0);
-	while (++i < 16)
-		(tmp->piece)[i] = 0;
-	tmp->next = NULL;
-	return (tmp);
+	else if (ft_strlen(str) != 0)
+		return (0);
+	return (1);
 }
 
-void		line_convert(t_pieces **curr, char *line, int which)
+int		check_file(int fd, t_pieces **head)
 {
-	if (line[0] == '#')
-		((*curr)->piece)[which] += ft_power(2, 15);
-	if (line[1] == '#')
-		((*curr)->piece)[which] += ft_power(2, 14);
-	if (line[2] == '#')
-		((*curr)->piece)[which] += ft_power(2, 13);
-	if (line[3] == '#')
-		((*curr)->piece)[which] += ft_power(2, 12);
-}
-
-void		initialize_pieces(t_pieces **head)
-{
+	char		*line;
+	int			nbr_lines;
 	t_pieces	*tmp;
 
+	nbr_lines = 1;
 	tmp = *head;
-	while (tmp)
+	while (get_next_line(fd, &line) > 0)
 	{
-		ft_reset_piece(tmp, 4);
-		tmp = tmp->next;
+		if (!tmp && !(tmp = create_lstlink(head)))
+			return (0);
+		if ((nbr_lines % 5))
+		{
+			if (!(check_line(line, 0)))
+				return (0);
+			line_convert(&tmp, line, (nbr_lines % 5) - 1);
+		}
+		else
+		{
+			if (!(check_line(line, 1)))
+				return (0);
+			tmp = tmp->next;
+		}
+		nbr_lines++;
 	}
+	return (tmp == NULL ? 0 : 1);
 }
