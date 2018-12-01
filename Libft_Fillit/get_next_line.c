@@ -6,7 +6,7 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 17:54:28 by scoron            #+#    #+#             */
-/*   Updated: 2018/11/29 15:32:06 by scoron           ###   ########.fr       */
+/*   Updated: 2018/11/30 19:02:13 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,29 @@ static t_chain	*ft_newfd(int fd)
 	nw->res = NULL;
 	nw->fd = fd;
 	return (nw);
+}
+
+static t_chain	*ft_delfd(t_chain *fd_chain)
+{
+	t_chain	*tmp;
+
+	if (!fd_chain)
+		return (NULL);
+	if (fd_chain->next)
+		fd_chain->next->previous = fd_chain->previous;
+	if (fd_chain->previous)
+		fd_chain->previous->next = fd_chain->next;
+	if (fd_chain->res)
+		free(fd_chain->res);
+	tmp = fd_chain;
+	if (fd_chain->previous)
+		fd_chain = fd_chain->previous;
+	else if (fd_chain->next)
+		fd_chain = fd_chain->next;
+	tmp->previous = NULL;
+	tmp->next = NULL;
+	free(tmp);
+	return (fd_chain);
 }
 
 static t_chain	*ft_getfd(t_chain *fd_chain, int fd)
@@ -51,7 +74,7 @@ static int		ft_joinfree(t_chain *fd_chain)
 
 	checkread = 1;
 	tmp = 0;
-	if (!(buf = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1))))
+	if (!(buf = (char *)malloc(sizeof(char) * (BUFF_SIZE))))
 		return (-1);
 	*buf = 0;
 	while (!(ft_strchr(buf, '\n')) && checkread > 0)
@@ -91,5 +114,7 @@ int				get_next_line(const int fd, char **line)
 	if (checkread < 0)
 		return (-1);
 	*line = ft_strcutuntil(&(fd_chain->res), '\n');
+	if (checkread == 0)
+		fd_chain = ft_delfd(fd_chain);
 	return (checkread > 0 ? 1 : checkread);
 }
