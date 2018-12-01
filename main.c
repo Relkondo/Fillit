@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:01 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/01 22:10:44 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/01 22:15:38 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		check_file(int fd, t_pieces **head)
 		}
 		nbr_lines++;
 	}
-	return (1);
+	return (tmp == NULL ? 0 : 1);
 }
 
 int		errors(int type)
