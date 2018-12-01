@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:01 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/01 21:55:01 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/01 22:10:44 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		check_line(char *str, int type)
 				return (0);
 	}
 	else if (ft_strlen(str) != 0)
-			return (0);
+		return (0);
 	return (1);
 }
 
@@ -74,7 +74,7 @@ int		ft_sqsize(t_pieces *head)
 {
 	int i;
 	int j;
-	
+
 	if (!head)
 		return (0);
 	i = 4;

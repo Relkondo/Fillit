@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 16:19:37 by jubeal            #+#    #+#             */
-/*   Updated: 2018/11/30 13:25:15 by jubeal           ###   ########.fr       */
+/*   Updated: 2018/12/01 22:08:42 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	affichage(t_pieces *head, int taille_map)
 	map_innit(map, taille_map);
 	while (head)
 	{
-		piece_in_map(map, taille_map,  head->piece, aff);
+		piece_in_map(map, taille_map, head->piece, aff);
 		aff++;
 		tmp = head;
 		head = head->next;
