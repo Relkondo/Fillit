@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:01 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/01 22:24:19 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/02 14:30:01 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,29 @@ int		ft_sqsize(t_pieces *head)
 	j = 2;
 	while (j * j < i)
 		j++;
-	return (j - 1);
+	return (j);
+}
+
+int		ft_countpieces(t_pieces *head)
+{
+	t_pieces	*tmp;
+	int			n;
+
+	tmp = head;
+	n = 1;
+	while (tmp->next)
+	{
+		n++;
+		tmp = tmp->next;
+	}
+	return (n);
 }
 
 int		main(int ac, char **av)
 {
 	int				fd;
 	t_pieces		*head;
-	int				sq_size;
+	t_fibox			*toolbox;
 	unsigned short	*map;
 
 	if (ac != 2)
@@ -56,8 +71,11 @@ int		main(int ac, char **av)
 			|| !(map = (unsigned short *)malloc(sizeof(unsigned short) * 16)))
 		return (errors(2));
 	initialize_pieces(&head);
-	sq_size = ft_sqsize(head);
-	if ((sq_size = ft_solve_init(head, &map, sq_size)))
-		affichage(head, sq_size - 1);
+	if (!(toolbox = (t_fibox *)malloc(sizeof(t_fibox))))
+		return (errors(2));
+	toolbox->n = ft_countpieces(head);
+	toolbox->sq_size = ft_sqsize(head);
+	if ((toolbox->sq_size = ft_solve_init(head, &map, toolbox)))
+		affichage(head, (toolbox->sq_size) - 1);
 	return (0);
 }

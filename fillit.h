@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:24 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/01 22:20:42 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/02 14:24:52 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,32 @@
 
 # include "libft.h"
 
-typedef struct				s_pieces
+typedef struct			s_pieces
 {
-	unsigned short			*piece;
-	struct s_pieces			*next;
-}							t_pieces;
+	unsigned short		*piece;
+	struct s_pieces		*next;
+}						t_pieces;
 
-t_pieces					*create_lstlink(t_pieces **link);
-void						line_convert(t_pieces **curr, char *line,
-							int which);
-void						initialize_pieces(t_pieces **head);
-int							ft_solve_init(t_pieces *bitch,
-							unsigned short **map, int sq_size);
-int							check_line(char *str, int type);
-int							check_file(int fd, t_pieces **head);
-int							ft_move_piece(t_pieces *bitch, int sq_size);
-void						ft_reset_piece(t_pieces *bitch, int sq_size);
-int							errors(int type);
-void						affichage(t_pieces *head, int taille_map);
+typedef	struct			s_fibox
+{
+	int					n;
+	int					sq_size;
+	int					h_max;
+}						t_fibox;
+
+t_pieces				*create_lstlink(t_pieces **link);
+void					line_convert(t_pieces **curr, char *line,
+						int which);
+void					initialize_pieces(t_pieces **head);
+int						ft_solve_init(t_pieces *bitch,
+						unsigned short **map, t_fibox *toolbox);
+int						check_line(char *str, int type);
+int						check_file(int fd, t_pieces **head);
+int						ft_move_piece(t_pieces *bitch, int sq_size);
+void					ft_reset_piece(t_pieces *bitch, int sq_size);
+int						errors(int type);
+void					affichage(t_pieces *head, int taille_map);
+int						ft_scanholes(t_fibox *toolbox,
+						t_pieces *bitch, unsigned short **map);
 
 #endif
