@@ -6,19 +6,22 @@
 #    By: scoron <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:44:30 by scoron            #+#    #+#              #
-#    Updated: 2018/12/02 14:23:01 by scoron           ###   ########.fr        #
+#    Updated: 2018/12/02 23:25:24 by scoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-SRCS = check_pieces.c \
-	   solve.c \
-	   main.c \
-	   affichage.c \
-	   move_piece.c \
+SRCS = main.c \
+	   check_pieces.c \
 	   support_check.c \
-	   scanholes.c
+	   solve.c \
+	   move_piece.c \
+	   scan_holes.c \
+	   check_hole.c \
+	   support_holes.c \
+	   affichage.c \
+	   
 
 OBJS = $(SRCS:.c=.o)
 

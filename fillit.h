@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:24 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/02 14:24:52 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/02 23:26:56 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ typedef	struct			s_fibox
 	int					n;
 	int					sq_size;
 	int					h_max;
+	int					nb_holes;
+	int					lmin;
+	int					lmax;
+	int					pos;
 }						t_fibox;
 
 t_pieces				*create_lstlink(t_pieces **link);
@@ -40,7 +44,25 @@ int						ft_move_piece(t_pieces *bitch, int sq_size);
 void					ft_reset_piece(t_pieces *bitch, int sq_size);
 int						errors(int type);
 void					affichage(t_pieces *head, int taille_map);
-int						ft_scanholes(t_fibox *toolbox,
+void					scan_holes(t_fibox *toolbox,
 						t_pieces *bitch, unsigned short **map);
+int						ft_checkhole_down(t_fibox *toolbox, unsigned short **map,
+						int line, int pos);
+int						ft_checkhole_up(t_fibox *toolbox, unsigned short **map,
+						int line, int pos);
+int						ft_checkhole_left(t_fibox *toolbox, unsigned short **map,
+						int line, int pos);
+int						ft_checkhole_right(t_fibox *toolbox, unsigned short **map,
+						int line, int pos);
+int						ft_send_up(t_fibox *toolbox, unsigned short **map,
+						int line, int pos);
+int						ft_send_down(t_fibox *toolbox, unsigned short **map,
+						int line, int pos);
+int						ft_send_right(t_fibox *toolbox, unsigned short **map,
+						int line, int pos);
+int						ft_send_left(t_fibox *toolbox, unsigned short **map,
+						int line, int pos);
+
+
 
 #endif
