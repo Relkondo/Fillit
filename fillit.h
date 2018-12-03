@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:24 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/02 23:26:56 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/03 15:37:14 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ typedef	struct			s_fibox
 	int					n;
 	int					sq_size;
 	int					h_max;
+	int					full_line;
 	int					nb_holes;
+	int					sz_hole;
 	int					lmin;
 	int					lmax;
 	int					pos;

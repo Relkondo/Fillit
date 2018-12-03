@@ -6,7 +6,7 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 17:36:05 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/02 23:27:09 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/03 18:01:34 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int		ft_solve(t_pieces *bitch, unsigned short **map, t_fibox *toolbox)
 
 	t = 0;
 	i = -1;
-	if (toolbox->h_max < 3)
+	if (toolbox->h_max < 2)
 		scan_holes(toolbox, bitch, map);
 	if (toolbox->nb_holes && toolbox->nb_holes > toolbox->h_max)
-			return (0);
+		t++;
 	while (++i < toolbox->sq_size && !t)
 		if ((*map)[i] & (bitch->piece)[i])
 			t++;
@@ -43,14 +43,16 @@ int		ft_solve(t_pieces *bitch, unsigned short **map, t_fibox *toolbox)
 
 int		ft_solve_init(t_pieces *bitch, unsigned short **map, t_fibox *toolbox)
 {
-	int		check;
+	int			check;
+
 
 	check = 0;
 	(toolbox->sq_size)--;
-	while ((toolbox->sq_size)++ < 16 && check == 0)
+	while ((toolbox->sq_size)++ <= 16 && check == 0)
 	{
 		check = -1;
 		toolbox->h_max = toolbox->sq_size * toolbox->sq_size - (toolbox->n) * 4;
+		toolbox->full_line = ft_power(2, (toolbox->sq_size)) - 1;
 		while (++check < (toolbox->sq_size))
 			(*map)[check] = 0;
 		check = ft_solve(bitch, map, toolbox);

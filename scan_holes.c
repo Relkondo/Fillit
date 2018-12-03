@@ -6,44 +6,47 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 14:21:15 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/02 23:30:18 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/03 17:04:55 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 
 void	ft_initbox(t_fibox *toolbox, t_pieces *bitch)
 {
 	toolbox->lmax = 0;
-	while ((bitch->piece)[toolbox->lmax] != 0)
-		toolbox->lmax++;
-	toolbox->lmin = 0;
-	toolbox->pos = -1;
+	while ((bitch->piece)[toolbox->lmax] == 0)
+		(toolbox->lmax)++;
+	toolbox->lmin = -1;
 	toolbox->nb_holes = 0;
 }
 
 void	scan_holes(t_fibox *toolbox, t_pieces *bitch, unsigned short **map)
 {
-	int 	tmp;
+	int test;
 
+	test = 0;
 	if (bitch->piece[0] != 0)
 		return ;
 	ft_initbox(toolbox, bitch);
 	while (++(toolbox->lmin) < toolbox->lmax)
-		if ((*map)[toolbox->lmin] != 0xFF00)
+	{
+		if ((*map)[toolbox->lmin] != toolbox->full_line)
 		{
+			toolbox->pos = -1;
 			while (++(toolbox->pos) < (toolbox->sq_size))
 			{
 				while ((((*map)[toolbox->lmin] << toolbox->pos) & 0x8000)
-						&& toolbox->pos < (toolbox->sq_size))
+						&& toolbox->pos < toolbox->sq_size)
 					(toolbox->pos)++;
-				tmp = toolbox->nb_holes;
-				if (!(ft_checkhole_right(toolbox, map, toolbox->lmin, toolbox->pos)))
-					toolbox->nb_holes = tmp;
-				else 
-					toolbox->nb_holes = tmp + (((toolbox->nb_holes) - tmp) % 4);
+				toolbox->sz_hole = 0;
+				if ((test = ft_checkhole_right(toolbox, map, toolbox->lmin, toolbox->pos)))
+					toolbox->nb_holes += (toolbox->sz_hole) % 4;
+				//printf("\nlmin : %d, lmax : %d, pos : %d, sz_hole : %d, test: %d,  nb_hole : %d\n", toolbox->lmin, toolbox->lmax, toolbox->pos, toolbox->sz_hole, test, toolbox->nb_holes);
 			}
 		}
+	}
 	return ;
 }
