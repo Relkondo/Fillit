@@ -6,7 +6,7 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 17:36:05 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/03 20:34:51 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/03 21:53:32 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,9 @@ int		ft_solve(t_pieces *bitch, unsigned short **map, t_fibox *toolbox)
 		i = -1;
 		while (++i < toolbox->sq_size)
 			(*map)[i] = (*map)[i] | (bitch->piece)[i];
-		if (toolbox->h_max < 2)
-		{
-			scan_holes(toolbox, bitch, map);
-			if (toolbox->nb_holes && toolbox->nb_holes > toolbox->h_max)
-				t++;
-		}
+		scan_holes(toolbox, bitch, map);
+		if (toolbox->nb_holes && toolbox->nb_holes > toolbox->h_max)
+			t++;
 		if (t == 0 && (!(bitch->next) || ft_solve(bitch->next, map, toolbox)))
 			return (1);
 		while (--i >= 0)
