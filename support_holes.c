@@ -6,7 +6,7 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 22:38:28 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/03 17:07:28 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/03 20:59:50 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_send_down(t_fibox *toolbox, unsigned short **map, int line, int pos)
 
 int		ft_send_right(t_fibox *toolbox, unsigned short **map, int line, int pos)
 {
-	if (pos != (toolbox->sq_size) - 1 && !(((*map)[line] << (pos + 1)) & 0x8000))
+	if (pos != ((toolbox->sq_size) - 1) && !(((*map)[line] << (pos + 1)) & 0x8000))
 		if (!(ft_checkhole_right(toolbox, map, line, pos + 1)))
 			return (0);
 	return (1);
