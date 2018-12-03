@@ -6,13 +6,12 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 16:19:37 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/01 22:08:42 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/03 22:26:54 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "fillit.h"
+#include <stdlib.h>
 
 void	map_innit(char **map, int taille_map)
 {

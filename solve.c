@@ -6,12 +6,11 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 17:36:05 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/03 21:53:32 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/03 22:36:59 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-# include <stdio.h>
 
 int		ft_solve(t_pieces *bitch, unsigned short **map, t_fibox *toolbox)
 {
@@ -28,8 +27,9 @@ int		ft_solve(t_pieces *bitch, unsigned short **map, t_fibox *toolbox)
 		i = -1;
 		while (++i < toolbox->sq_size)
 			(*map)[i] = (*map)[i] | (bitch->piece)[i];
-		scan_holes(toolbox, bitch, map);
-		if (toolbox->nb_holes && toolbox->nb_holes > toolbox->h_max)
+		if (toolbox->h_max < 5)
+			scan_holes(toolbox, bitch, map);
+		if (toolbox->nb_holes > toolbox->h_max)
 			t++;
 		if (t == 0 && (!(bitch->next) || ft_solve(bitch->next, map, toolbox)))
 			return (1);
@@ -51,6 +51,7 @@ int		ft_solve_init(t_pieces *bitch, unsigned short **map, t_fibox *toolbox)
 		check = -1;
 		toolbox->h_max = toolbox->sq_size * toolbox->sq_size - (toolbox->n) * 4;
 		toolbox->full_line = ft_power(2, (toolbox->sq_size)) - 1;
+		toolbox->nb_holes = 0;
 		while (++check < (toolbox->sq_size))
 			(*map)[check] = 0;
 		check = ft_solve(bitch, map, toolbox);

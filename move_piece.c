@@ -6,12 +6,11 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 21:07:44 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/03 21:15:00 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/03 22:27:40 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-# include <stdio.h>
 
 void	ft_carriage_return(t_pieces *bitch, int sq_size)
 {
