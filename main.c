@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:01 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/03 16:15:19 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/04 22:22:15 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ int		main(int ac, char **av)
 		return (errors(1));
 	head = create_lstlink(&head);
 	if ((fd = open(av[1], O_RDONLY)) == -1 || !check_file(fd, &head)
-			|| !(map = (unsigned short *)malloc(sizeof(unsigned short) * 16)))
+			|| !check_pieces(head))
+		return (errors(2));
+	if (!(map = (unsigned short *)malloc(sizeof(unsigned short) * 16)))
 		return (errors(2));
 	initialize_pieces(&head);
 	if (!(toolbox = (t_fibox *)malloc(sizeof(t_fibox))))

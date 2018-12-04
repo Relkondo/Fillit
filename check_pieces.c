@@ -3,60 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   check_pieces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 22:22:28 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/04 20:26:12 by scoron           ###   ########.fr       */
+/*   Created: 2018/12/04 21:21:58 by scoron            #+#    #+#             */
+/*   Updated: 2018/12/04 22:32:38 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <fcntl.h>
 #include "fillit.h"
 
-int		check_line(char *str, int type)
+void	check_sides(t_pieces *bitch, int ln, int pos, int *sides)
 {
-	int		i;
-
-	i = -1;
-	if (type == 0)
-	{
-		if (ft_strlen(str) != 4)
-			return (0);
-		while (str[++i])
-			if (str[i] != '.' && str[i] != '#')
-				return (0);
-	}
-	else if (ft_strlen(str) != 0)
-		return (0);
-	return (1);
+	if (pos < 15 && ((bitch->piece)[ln] << (pos + 1)) & 0x8000)
+		(*sides)++;
+	if (pos > 0 && ((bitch->piece)[ln] << (pos - 1)) & 0x8000)
+		(*sides)++;
+	if (ln > 0 && ((bitch->piece)[ln - 1] << pos) & 0x8000)
+		(*sides)++;
+	if (ln < 15 && ((bitch->piece)[ln + 1] << pos) & 0x8000)
+		(*sides)++;
 }
 
-int		check_file(int fd, t_pieces **head)
+int		check_pieces(t_pieces *bitch)
 {
-	char		*line;
-	int			nbr_lines;
-	t_pieces	*tmp;
+	int		ln;
+	int		pos;
+	int		nb;
+	int		sides;
 
-	nbr_lines = 1;
-	tmp = *head;
-	while (get_next_line(fd, &line) > 0)
+	ln = -1;
+	nb = 0;
+	sides = 0;
+	while (++ln < 16)
 	{
-		if (nbr_lines > 129 || (!tmp && !(tmp = create_lstlink(head))))
-			return (0);
-		if ((nbr_lines % 5))
+		pos = -1;
+		while (++pos < 16)
 		{
-			if (!(check_line(line, 0)))
-				return (0);
-			line_convert(&tmp, line, (nbr_lines % 5) - 1);
+			if (((bitch->piece)[ln] << pos) & 0x8000)
+			{
+				nb++;
+				check_sides(bitch, ln, pos, &sides);
+			}
 		}
-		else
-		{
-			if (!(check_line(line, 1)))
-				return (0);
-			tmp = tmp->next;
-		}
-		nbr_lines++;
 	}
-	return (tmp == NULL ? 0 : 1);
+	if (nb != 4 || sides > 8 || sides < 6)
+		return (0);
+	return (bitch->next ? check_pieces(bitch->next) : 1);
 }

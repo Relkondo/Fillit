@@ -6,7 +6,7 @@
 #    By: scoron <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:44:30 by scoron            #+#    #+#              #
-#    Updated: 2018/12/04 20:15:50 by scoron           ###   ########.fr        #
+#    Updated: 2018/12/04 22:26:12 by scoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = fillit
 
 SRCS = main.c \
 	   check_pieces.c \
+	   check_file.c \
 	   support_check.c \
 	   solve.c \
 	   move_piece.c \
@@ -27,7 +28,7 @@ OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) lib
+$(NAME) : lib $(OBJS)
 		@gcc -o $(NAME) $(OBJS) -I libft/includes -L libft/ -lft
 
 %.o : %.c

@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:24 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/04 19:52:32 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/04 22:01:01 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int						ft_solve_init(t_pieces *bitch,
 						unsigned short **map, t_fibox *toolbox);
 int						check_line(char *str, int type);
 int						check_file(int fd, t_pieces **head);
+int						check_pieces(t_pieces *bitch);
 int						ft_move_piece(t_pieces *bitch, int sq_size);
 void					ft_reset_piece(t_pieces *bitch, int sq_size);
 int						errors(int type);
