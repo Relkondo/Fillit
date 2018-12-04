@@ -6,7 +6,7 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 17:36:05 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/03 22:36:59 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/04 22:52:44 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_solve_init(t_pieces *bitch, unsigned short **map, t_fibox *toolbox)
 
 	check = 0;
 	(toolbox->sq_size)--;
-	while ((toolbox->sq_size)++ <= 16 && check == 0)
+	while (++(toolbox->sq_size) <= 16 && check == 0)
 	{
 		check = -1;
 		toolbox->h_max = toolbox->sq_size * toolbox->sq_size - (toolbox->n) * 4;

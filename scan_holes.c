@@ -6,7 +6,7 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 14:21:15 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/03 22:30:38 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/04 22:50:48 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_initbox(t_fibox *toolbox, t_pieces *bitch)
 	toolbox->lmax = 0;
 	while ((bitch->piece)[toolbox->lmax] == 0)
 		(toolbox->lmax)++;
-	(toolbox->lmax)++;
+	if ((toolbox->lmax) != 15)
+		(toolbox->lmax)++;
 	toolbox->lmin = -1;
 	toolbox->nb_holes = 0;
 }

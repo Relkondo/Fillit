@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:01 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/04 22:22:15 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/04 23:35:08 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,37 @@ int		errors(int type)
 	return (1);
 }
 
+void	check_small_size(t_pieces *bitch, int *j)
+{
+	if (*j < 3 && ((bitch->piece)[2] | 0 || (bitch->piece)[0] & 0x2000
+				|| (bitch->piece)[1] & 0x2000))
+		*j = 3;
+	if (*j < 4 && ((bitch->piece)[3] | 0 || (bitch->piece)[0] & 0x1000))
+		*j = 4;
+	if (bitch->next)
+		check_small_size(bitch->next, j);
+}
+
 int		ft_sqsize(t_pieces *head)
 {
-	int i;
-	int j;
+	int			i;
+	int			j;
+	t_pieces	*bitch;
 
 	if (!head)
 		return (0);
+	bitch = head;
 	i = 4;
-	while (head->next)
+	while (bitch->next)
 	{
-		head = head->next;
+		bitch = bitch->next;
 		i += 4;
 	}
 	j = 2;
 	while (j * j < i)
 		j++;
+	if (j < 4)
+		check_small_size(head, &j);
 	return (j);
 }
 
