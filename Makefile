@@ -6,7 +6,7 @@
 #    By: scoron <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:44:30 by scoron            #+#    #+#              #
-#    Updated: 2018/12/02 23:25:24 by scoron           ###   ########.fr        #
+#    Updated: 2018/12/04 20:15:50 by scoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,22 +27,24 @@ OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) lib
 		@gcc -o $(NAME) $(OBJS) -I libft/includes -L libft/ -lft
 
 %.o : %.c
 	@gcc -Wall -Wextra -Werror -I libft/includes -c $< -o $@
 
 clean :
+	@make -C libft/ clean
 	@/bin/rm -f $(OBJS)
 
 fclean : clean
+	@make -C libft/ fclean
 	@/bin/rm -f $(NAME)
 
 re : fclean all
 
 lib :
-	@make -C libft/ fclean && make -C libft/
+	@make -C libft/
 
 push : fclean
 	@git add -A

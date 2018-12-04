@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:24 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/03 21:04:40 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/04 19:52:32 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,23 @@ int						errors(int type);
 void					affichage(t_pieces *head, int taille_map);
 void					scan_holes(t_fibox *toolbox,
 						t_pieces *bitch, unsigned short **map);
-int						ft_checkhole_init(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-int						ft_checkhole_down(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-int						ft_checkhole_up(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-int						ft_checkhole_left(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-int						ft_checkhole_right(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-int						ft_send_up(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-int						ft_send_down(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-int						ft_send_right(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-int						ft_send_left(t_fibox *toolbox, unsigned short **map,
-						int line, int pos);
-
-
+int						ft_checkhole_init(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
+int						ft_checkhole_down(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
+int						ft_checkhole_up(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
+int						ft_checkhole_left(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
+int						ft_checkhole_right(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
+int						ft_send_up(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
+int						ft_send_down(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
+int						ft_send_right(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
+int						ft_send_left(t_fibox *toolbox,
+						unsigned short **map, int line, int pos);
 
 #endif

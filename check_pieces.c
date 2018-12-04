@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 22:22:28 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/01 22:23:35 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/04 20:26:12 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		check_file(int fd, t_pieces **head)
 	tmp = *head;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!tmp && !(tmp = create_lstlink(head)))
+		if (nbr_lines > 129 || (!tmp && !(tmp = create_lstlink(head))))
 			return (0);
 		if ((nbr_lines % 5))
 		{
