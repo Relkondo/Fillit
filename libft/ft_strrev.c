@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 10:34:08 by jubeal            #+#    #+#             */
-/*   Updated: 2018/11/27 15:49:19 by jubeal           ###   ########.fr       */
+/*   Updated: 2018/12/05 20:33:24 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ char	*ft_strrev(char	const *str)
 
 	i = 0;
 	i = ft_strlen(str);
-	i++;
-	if (!(ret = (char *)malloc(sizeof(char) * i)))
+	if (!(ret = (char *)malloc(sizeof(char) * (i + 1))))
 		return ((char *)0);
-	i -= 2;
+	i -= 1;
 	j = 0;
 	while (i >= 0)
 	{

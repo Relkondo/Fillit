@@ -6,7 +6,7 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 17:54:28 by scoron            #+#    #+#             */
-/*   Updated: 2018/11/30 19:02:13 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/05 20:28:11 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int		ft_joinfree(t_chain *fd_chain)
 
 	checkread = 1;
 	tmp = 0;
-	if (!(buf = (char *)malloc(sizeof(char) * (BUFF_SIZE))))
+	if (!(buf = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1))))
 		return (-1);
 	*buf = 0;
 	while (!(ft_strchr(buf, '\n')) && checkread > 0)

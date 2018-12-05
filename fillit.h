@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:24 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/04 22:01:01 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/05 20:28:50 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int						check_pieces(t_pieces *bitch);
 int						ft_move_piece(t_pieces *bitch, int sq_size);
 void					ft_reset_piece(t_pieces *bitch, int sq_size);
 int						errors(int type);
-void					affichage(t_pieces *head, int taille_map);
+void					display(t_pieces *head, int taille_map);
 void					scan_holes(t_fibox *toolbox,
 						t_pieces *bitch, unsigned short **map);
 int						ft_checkhole_init(t_fibox *toolbox,

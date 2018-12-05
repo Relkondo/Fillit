@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:41:01 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/04 23:35:08 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/05 20:29:22 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ int		main(int ac, char **av)
 	toolbox->n = ft_countpieces(head);
 	toolbox->sq_size = ft_sqsize(head);
 	if ((toolbox->sq_size = ft_solve_init(head, &map, toolbox)))
-		affichage(head, (toolbox->sq_size) - 1);
+		display(head, (toolbox->sq_size) - 1);
 	return (0);
 }

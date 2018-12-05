@@ -6,7 +6,7 @@
 #    By: scoron <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:44:30 by scoron            #+#    #+#              #
-#    Updated: 2018/12/04 22:26:12 by scoron           ###   ########.fr        #
+#    Updated: 2018/12/05 20:26:11 by scoron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ SRCS = main.c \
 	   scan_holes.c \
 	   check_hole.c \
 	   support_holes.c \
-	   affichage.c \
-	   
+	   display.c \
+
 
 OBJS = $(SRCS:.c=.o)
 

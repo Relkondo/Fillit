@@ -6,7 +6,7 @@
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 16:19:37 by jubeal            #+#    #+#             */
-/*   Updated: 2018/12/04 22:44:00 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/05 20:27:44 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	piece_in_map(char **map, int taille_map, unsigned short *piece,
 	}
 }
 
-void	affichage(t_pieces *head, int taille_map)
+void	display(t_pieces *head, int taille_map)
 {
 	t_pieces		*tmp;
 	char			**map;
@@ -84,12 +84,12 @@ void	affichage(t_pieces *head, int taille_map)
 
 	i = -1;
 	aff = 'A' - 1;
-	if (!(map = (char **)malloc(sizeof(char	*) * taille_map + 1)))
+	if (!(map = (char **)malloc(sizeof(char	*) * (taille_map + 1))))
 		return ;
 	map[taille_map] = NULL;
 	while (++i < taille_map)
 	{
-		if (!(map[i] = (char *)malloc(sizeof(char) * taille_map + 1)))
+		if (!(map[i] = (char *)malloc(sizeof(char) * (taille_map + 1))))
 			return ;
 		map[i][taille_map] = '\0';
 	}
