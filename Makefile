@@ -60,7 +60,7 @@ fclean : clean
 re : fclean all
 
 lib :
-	@make -C libft/
+	@make -C $(LIB)
 
 push : fclean
 	@git add -A

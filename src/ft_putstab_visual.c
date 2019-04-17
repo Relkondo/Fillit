@@ -79,9 +79,9 @@ static void	ft_putbody(char *buff, char **str, int size)
 void		ft_putstab_visual(char **str, int size)
 {
 	int		i;
-	char	buff[1000];
+	char	*buff;
 
-	ft_memset(buff, 1000, '\0');
+	buff = ft_strnew((size_t)(((size + 3) * (size + 3)) + 200));
 	ft_puthead(buff, size);
 	i = 0;
 	ft_putbody(buff, str, size);
@@ -90,5 +90,6 @@ void		ft_putstab_visual(char **str, int size)
 		ft_strcat(buff, "---");
 	ft_strcat(buff, "./\n");
 	write(1, buff, ft_strlen(buff));
+	free(buff);
 	return ;
 }
