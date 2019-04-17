@@ -12,7 +12,7 @@
 
 NAME = fillit
 
-SRCS = main.c \
+S_NAME = main.c \
 	   check_pieces.c \
 	   check_file.c \
 	   support_check.c \
@@ -24,23 +24,37 @@ SRCS = main.c \
 	   display.c \
 	   ft_putstab_visual.c\
 
+S_PATH = src/
 
-OBJS = $(SRCS:.c=.o)
+SRCS = $(addprefix $(S_PATH), $(S_NAME))
+
+O_PATH = obj/
+
+OBJS = $(addprefix $(O_PATH), $(S_NAME:.c=.o))
+
+HEADER = fillit.h
+
+FLAGS = -Wall -Wextra -Werror
+
+L_PATH = libft/
+
+LIB = $(addprefix $(S_PATH), $(L_PATH))
 
 all : $(NAME)
 
 $(NAME) : lib $(OBJS)
-		@gcc -o $(NAME) $(OBJS) -I libft/includes -L libft/ -lft
+	@gcc -o $(NAME) $(OBJS) $(FLAGS) -I libft/includes -L $(LIB) -lft
 
-%.o : %.c
-	@gcc -Wall -Wextra -Werror -I libft/includes -c $< -o $@
+$(O_PATH)%.o : $(S_PATH)%.c includes/$(HEADER)
+	@mkdir -p $(O_PATH)
+	@clang $(FLAGS) -I includes -c $< -o $@
 
 clean :
-	@make -C libft/ clean
-	@/bin/rm -f $(OBJS)
+	@make -C $(LIB) clean
+	@/bin/rm -rf $(O_PATH)
 
 fclean : clean
-	@make -C libft/ fclean
+	@make -C $(LIB) fclean
 	@/bin/rm -f $(NAME)
 
 re : fclean all
