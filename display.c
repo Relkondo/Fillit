@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   affichage.c                                        :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubeal <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,16 +13,16 @@
 #include "fillit.h"
 #include <stdlib.h>
 
-void	map_innit(char **map, int taille_map)
+void	map_init(char **map, int size_map)
 {
 	int		i;
 	int		j;
 
 	i = -1;
-	while (++i < taille_map)
+	while (++i < size_map)
 	{
 		j = -1;
-		while (++j < taille_map)
+		while (++j < size_map)
 			map[i][j] = '.';
 	}
 }
@@ -54,7 +54,7 @@ void	convert_to_16bits(char **line)
 	*line = tmp;
 }
 
-void	piece_in_map(char **map, int taille_map, unsigned short *piece,
+void	piece_in_map(char **map, int size_map, unsigned short *piece,
 		char car)
 {
 	int		i;
@@ -62,20 +62,20 @@ void	piece_in_map(char **map, int taille_map, unsigned short *piece,
 	char	*line;
 
 	i = -1;
-	while (++i < taille_map)
+	while (++i < size_map)
 	{
 		line = ft_itoa(piece[i]);
 		line = ft_convert_base(line, "0123456789", "01");
 		convert_to_16bits(&line);
 		j = -1;
-		while (++j < taille_map)
+		while (++j < size_map)
 			if (line[j] == '1')
 				map[i][j] = car;
 		free(line);
 	}
 }
 
-void	display(t_pieces *head, int taille_map)
+void	display(t_pieces *head, int size_map)
 {
 	t_pieces		*tmp;
 	char			**map;
@@ -84,22 +84,25 @@ void	display(t_pieces *head, int taille_map)
 
 	i = -1;
 	aff = 'A' - 1;
-	if (!(map = (char **)malloc(sizeof(char	*) * (taille_map + 1))))
+	if (!(map = (char **)malloc(sizeof(char	*) * (size_map + 1))))
 		return ;
-	map[taille_map] = NULL;
-	while (++i < taille_map)
+	map[size_map] = NULL;
+	while (++i < size_map)
 	{
-		if (!(map[i] = (char *)malloc(sizeof(char) * (taille_map + 1))))
+		if (!(map[i] = (char *)malloc(sizeof(char) * (size_map + 1))))
 			return ;
-		map[i][taille_map] = '\0';
+		map[i][size_map] = '\0';
 	}
-	map_innit(map, taille_map);
+	map_init(map, size_map);
 	while (head)
 	{
-		piece_in_map(map, taille_map, head->piece, ++aff);
+		piece_in_map(map, size_map, head->piece, ++aff);
 		tmp = head;
 		head = head->next;
 		lst_free(tmp);
 	}
-	ft_putstab(map);
+	if (COLOR)
+		ft_putstab_visual(map, size_map);
+	else
+		ft_putstab(map);
 }

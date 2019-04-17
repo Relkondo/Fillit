@@ -14,6 +14,9 @@
 # define FILLIT_H
 
 # include "libft.h"
+# include <stdbool.h>
+
+# define COLOR			true
 
 typedef struct			s_pieces
 {
@@ -46,7 +49,7 @@ int						check_pieces(t_pieces *bitch);
 int						ft_move_piece(t_pieces *bitch, int sq_size);
 void					ft_reset_piece(t_pieces *bitch, int sq_size);
 int						errors(int type);
-void					display(t_pieces *head, int taille_map);
+void					display(t_pieces *head, int size_map);
 void					scan_holes(t_fibox *toolbox,
 						t_pieces *bitch, unsigned short **map);
 int						ft_checkhole_init(t_fibox *toolbox,
@@ -67,5 +70,6 @@ int						ft_send_right(t_fibox *toolbox,
 						unsigned short **map, int line, int pos);
 int						ft_send_left(t_fibox *toolbox,
 						unsigned short **map, int line, int pos);
+void					ft_putstab_visual(char **str, int size);
 
 #endif

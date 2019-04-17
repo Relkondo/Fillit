@@ -22,6 +22,7 @@ SRCS = main.c \
 	   check_hole.c \
 	   support_holes.c \
 	   display.c \
+	   ft_putstab_visual.c\
 
 
 OBJS = $(SRCS:.c=.o)
