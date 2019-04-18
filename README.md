@@ -9,7 +9,7 @@
 ### **Description**
 
 Fillit is an algorithm exercise. 
-It's a programm that receives a set of tetraminos and gives you the smallest square possible in which all pieces can fit.
+It's a program that receives a set of tetraminos and gives you the smallest square possible in which all pieces can fit.
 You can find the subject [here](./fillit.en.pdf)
 
 ### **Vuilding**
