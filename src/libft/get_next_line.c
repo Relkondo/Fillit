@@ -6,11 +6,12 @@
 /*   By: scoron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 17:54:28 by scoron            #+#    #+#             */
-/*   Updated: 2018/12/05 20:28:11 by scoron           ###   ########.fr       */
+/*   Updated: 2018/12/05 21:19:39 by scoron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "get_next_line.h"
 
 static t_chain	*ft_newfd(int fd)
 {
@@ -42,6 +43,8 @@ static t_chain	*ft_delfd(t_chain *fd_chain)
 		fd_chain = fd_chain->previous;
 	else if (fd_chain->next)
 		fd_chain = fd_chain->next;
+    	else
+        	fd_chain = NULL;
 	tmp->previous = NULL;
 	tmp->next = NULL;
 	free(tmp);
